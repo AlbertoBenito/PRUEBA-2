@@ -1,0 +1,69 @@
+
+// COMPILAR SIEMPRE LOS MIXINS
+@use '../mixins/hover.scss' as *;
+@use '../mixins/pseudo.scss' as *;
+@use '../mixins/responsive.scss' as *;
+
+// MOVIMIENTOS  Y ESCALAS -> TRANSLATE, ROTATE Y SCALE
+// MOSTRAR / OCULTAR --> OPACITY
+
+
+
+.box{ 
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: rgb(255, 166, 0);
+    // NUNCA PONER TRANSITION ALL
+    transition: translate .3s;
+
+    // Esto es lo mismo es la mejor forma
+    @include hover{
+        background-color: blue;
+        // translate: X Y
+        translate: 0 100px;
+    }
+
+    // Esto es lo mismo
+    @media (hover:hover){
+        &:hover{
+            background-color: blue;
+           
+        }
+        
+    }
+    &::after{
+        // para poner medida individual
+        // @include pseudo(150px,150px){
+        //     top: 200px;
+        //     left: 200px;
+        //     background-color: red;
+        // }
+
+        // coje la medida del padre por el position: relative
+        @include pseudo{
+            top: 200px;
+            left: 200px;
+            background-color: red;
+        }
+
+       
+    }
+    // Con medida de TABLET, LAPTOP, DESKTOP
+    // @include responsive(laptop){
+    //     width: 500px;}
+
+// Con medida ESCRITA
+    @include responsive(1000px){
+            width: 500px;}
+
+}
+// Esto es lo mismo
+@media (hover:hover){
+    .box:hover{
+        background-color: blue;
+    }
+
+
+}
+
